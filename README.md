@@ -1,1 +1,1 @@
-# Simple detrended fluctuation analysis (DFA) service in Flask using fathon
+Simple detrended fluctuation analysis (DFA) service in Flask using fathon
