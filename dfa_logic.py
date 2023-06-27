@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import fathon
 from fathon import fathonUtils as fu
 from flask import Flask, request, jsonify
