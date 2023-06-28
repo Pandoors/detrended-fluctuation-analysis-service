@@ -2,15 +2,16 @@ import numpy as np
 import fathon
 from fathon import fathonUtils as fu
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 
 def perform_dfa(data_value):
-    a = np.array(data_value.split(", ")).astype(int)
-    a = fu.toAggregated(a)
+    # a = np.array(data_value.split(", ")).astype(int)
+    a = fu.toAggregated(data_value)
 
     pydfa = fathon.DFA(a)
 
-    winSizes = fu.linRangeByStep(200, 1000)
+    winSizes = fu.linRangeByStep(200, 500)
     revSeg = True
     polOrd = 3
 
@@ -18,7 +19,7 @@ def perform_dfa(data_value):
 
     H, H_intercept = pydfa.fitFlucVec()
 
-    limits_list = np.array([[200, 1000], [200, 1000]], dtype=int)
+    limits_list = np.array([[200, 500], [200, 500]], dtype=int)
     list_H, list_H_intercept = pydfa.multiFitFlucVec(limits_list)
     response = {
         'H': H,
@@ -41,11 +42,9 @@ def validate_data(data):
 def handle_request():
     data = request.get_json()
     data_value = data['data']
+    print(data_value)
+    return perform_dfa(data_value)
 
-    if validate_data(data_value):
-        return perform_dfa(data_value)
-    else:
-        return jsonify({'message': 'Invalid data'})
 
 
 if __name__ == '__main__':
