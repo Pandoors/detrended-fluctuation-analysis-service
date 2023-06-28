@@ -8,7 +8,7 @@ from flask_cors import CORS
 def perform_dfa(data_value):
     # a = np.array(data_value.split(", ")).astype(int)
     a = fu.toAggregated(data_value)
-
+    # a = 60/a
     pydfa = fathon.DFA(a)
 
     winSizes = fu.linRangeByStep(200, 500)
