@@ -10,7 +10,7 @@ def perform_dfa(data_value):
 
     pydfa = fathon.DFA(a)
 
-    winSizes = fu.linRangeByStep(10, 100)
+    winSizes = fu.linRangeByStep(200, 1000)
     revSeg = True
     polOrd = 3
 
@@ -18,7 +18,7 @@ def perform_dfa(data_value):
 
     H, H_intercept = pydfa.fitFlucVec()
 
-    limits_list = np.array([[10, 100], [10, 100]], dtype=int)
+    limits_list = np.array([[200, 1000], [200, 1000]], dtype=int)
     list_H, list_H_intercept = pydfa.multiFitFlucVec(limits_list)
     response = {
         'H': H,
